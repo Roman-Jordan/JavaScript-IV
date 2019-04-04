@@ -28,7 +28,8 @@ class Instructors extends Person{
         return `${this.name} receives a perfect score on ${subject}`
     }
     randomPoints(student){
-        //const random =  Math.floor(Math.random()*15); 
+        let random =  Math.floor(Math.random()*15); 
+        return student.grade % 2 === 0 ? student.grade + random: student.grade - random; 
     }
 }
 
@@ -46,7 +47,7 @@ class Project_Manager extends Instructors{
     }
 }
 
-class Students extends Project_Manager{
+class Students extends Person{
     constructor(stuData){
         super(stuData);
         this.listsSubjects = stuData.listsSubjects;
@@ -58,8 +59,8 @@ class Students extends Project_Manager{
     PRSprint(subject){
         `${this.name} has begun sprint challenge on ${subject}`
     }
-    graduate(){
-        this.grade = this.randomGrade(this);
+    graduate(instructor){
+        this.grade = instructor.randomPoints(this);
         return this.grade > 70 ? 
         `I suppose you can graduate: ${this.grade}` : 
         `Your Stuck another Week: ${this.grade}`;
@@ -83,7 +84,8 @@ const Josh = new Instructors({
     gender: 'male',
     favLanguage: 'PHP',
     specialty: 'DataConversion and Catching',
-    catchPhrase: `Suck it easy Bro`
+    catchPhrase: `Suck it easy Bro`,
+    grade : 20
   });
 
   const Enoka = new Project_Manager({
@@ -100,12 +102,7 @@ const Josh = new Instructors({
       grade : Math.floor(Math.random() * 101)
   });
 
-  const guy = {
-      name : 'roman',
-      grade: 100
-  }
-  console.log(student.graduate());
+  //console.log(student.graduate());
   console.log(Enoka.debugsCode(student,'JavaScript'));
-  console.log(Enoka.standUp('Roman','@squad19_Enoka'));
-  console.log(Enoka.standUp('Roman','@squad19_Enoka'));
-  console.log(Enoka.standUp('Roman','@squad19_Enoka'));
+  console.log(Roman.graduate(Josh));
+ 
